@@ -40,7 +40,7 @@ export const JobMatchAnalyzer = () => {
     };
 
     return (
-        <section className="sticky top-0 z-40 py-20 px-6 bg-[#050505] min-h-screen flex flex-col justify-center">
+        <section className="relative md:sticky md:top-0 z-40 py-20 px-6 bg-[#050505] min-h-screen flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
                 <div className="mb-12 text-left">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">

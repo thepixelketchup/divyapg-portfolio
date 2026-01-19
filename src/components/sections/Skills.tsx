@@ -5,7 +5,7 @@ import { Cloud, Code, Database, GitBranch, PenTool, Server } from 'lucide-react'
 
 export const Skills = () => {
     return (
-        <section id="skills" className="sticky top-0 z-30 py-20 px-6 bg-[#050505] min-h-screen flex flex-col justify-center">
+        <section id="skills" className="relative md:sticky md:top-0 z-30 py-20 px-6 bg-[#050505] min-h-screen flex flex-col justify-center">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
