@@ -3,7 +3,7 @@ import React from 'react';
 
 interface BadgeProps {
     children: React.ReactNode;
-    color?: 'emerald' | 'purple' | 'blue' | 'orange' | 'gray';
+    color?: 'emerald' | 'purple' | 'blue' | 'orange' | 'gray' | 'yellow';
     className?: string;
 }
 
@@ -13,6 +13,7 @@ export const Badge = ({ children, color = "emerald", className }: BadgeProps) =>
         purple: "bg-purple-500/10 text-purple-300 border-purple-500/20",
         blue: "bg-blue-500/10 text-blue-300 border-blue-500/20",
         orange: "bg-orange-500/10 text-orange-300 border-orange-500/20",
+        yellow: "bg-yellow-500/10 text-yellow-400 border-yellow-500/20",
         gray: "bg-gray-800 text-gray-300 border-gray-700",
     };
 

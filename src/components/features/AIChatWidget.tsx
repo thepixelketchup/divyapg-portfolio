@@ -12,7 +12,10 @@ interface Message {
 export const AIChatWidget = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'assistant', text: "Hi! I'm Divya's AI assistant. Are you reaching out for a project or job opportunity? 🚀" }
+        {
+            role: 'assistant',
+            text: "Hi! I'm Divya's AI Agent. How can I help you?\n\nHere are a few things you can ask me:\n• Tell me about Divya's experience\n• What matches Divya's skills?\n• Is Divya available for a project?\n\nAre you reaching out for a project or job opportunity? 🚀"
+        }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -49,10 +52,17 @@ export const AIChatWidget = () => {
             const data = await response.json();
             let aiResponse = data.text || "I'm having trouble connecting right now. Please try again later.";
 
-            if (aiResponse.includes('[PREPARE_EMAIL_DRAFT]')) {
+            if (aiResponse.includes('[EMAIL_SUMMARY_START]')) {
+                const parts = aiResponse.split('[EMAIL_SUMMARY_START]');
+                const conversationalText = parts[0].trim();
+                const summaryPart = parts[1].split('[EMAIL_SUMMARY_END]')[0].trim();
+
+                aiResponse = conversationalText;
+                setEmailDraft(summaryPart);
+            } else if (aiResponse.includes('[PREPARE_EMAIL_DRAFT]')) {
+                // Fallback for older api responses or cache
                 aiResponse = aiResponse.replace('[PREPARE_EMAIL_DRAFT]', '').trim();
-                const conversationSummary = messages.map(m => `${m.role === 'user' ? 'Recruiter' : 'AI'}: ${m.text}`).join('\n') + `\nRecruiter: ${input}\nAI: ${aiResponse}`;
-                setEmailDraft(conversationSummary);
+                setEmailDraft(aiResponse);
             }
 
             setMessages(prev => [...prev, { role: 'assistant', text: aiResponse }]);
@@ -86,16 +96,16 @@ export const AIChatWidget = () => {
             </button>
 
             {isOpen && (
-                <div className="fixed bottom-24 right-6 z-50 w-80 md:w-96 h-[600px] max-h-[80vh] bg-[#111] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
+                <div className="fixed bottom-24 right-6 z-50 w-80 md:w-96 h-[500px] md:h-[600px] max-h-[70vh] md:max-h-[80vh] bg-[#111] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
                     <div className="p-4 bg-gradient-to-r from-emerald-900/40 to-cyan-900/40 border-b border-white/5 flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center">
                             <Bot size={18} className="text-black" />
                         </div>
                         <div>
-                            <h3 className="font-bold text-white text-sm">Divya's Intake Agent</h3>
+                            <h3 className="font-bold text-white text-sm">Divya's AI Agent</h3>
                             <p className="text-xs text-emerald-400 flex items-center gap-1">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                Online • Immediately Available
+                                Online
                             </p>
                         </div>
                     </div>
@@ -110,7 +120,7 @@ export const AIChatWidget = () => {
                                     {msg.role === 'user' ? <User size={16} /> : <Sparkles size={16} />}
                                 </div>
                                 <div className={cn(
-                                    "p-3 rounded-2xl text-sm max-w-[80%]",
+                                    "p-3 rounded-2xl text-sm max-w-[80%] whitespace-pre-wrap",
                                     msg.role === 'user'
                                         ? 'bg-white text-black rounded-tr-none'
                                         : 'bg-white/5 text-gray-200 border border-white/5 rounded-tl-none'
@@ -164,7 +174,7 @@ export const AIChatWidget = () => {
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                placeholder="Type your message..."
+                                placeholder="Ask about experience, skills, or availability..."
                                 className="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors"
                             />
                             <button

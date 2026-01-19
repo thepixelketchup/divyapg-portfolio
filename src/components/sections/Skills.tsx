@@ -92,6 +92,19 @@ export const Skills = () => {
                             ))}
                         </div>
                     </BentoCard>
+
+                    {/* Languages */}
+                    <BentoCard className="bg-[#111]">
+                        <div className="flex items-center gap-3 mb-6 text-pink-400">
+                            <PenTool size={24} />
+                            <h3 className="text-lg font-bold text-white">Languages</h3>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {['English (Professional)', 'Dutch (A2)', 'Hindi (Native)'].map(s => (
+                                <span key={s} className="px-2 py-1 bg-white/5 rounded text-sm text-gray-400 border border-white/5">{s}</span>
+                            ))}
+                        </div>
+                    </BentoCard>
                 </div>
             </div>
         </section>

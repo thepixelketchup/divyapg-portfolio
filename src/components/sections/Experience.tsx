@@ -127,8 +127,63 @@ export const Experience = () => {
                         </div>
                     </BentoCard>
 
+                    {/* Job 5 */}
+                    <BentoCard className="relative pl-8 md:pl-10">
+                        <div className="absolute top-8 left-0 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                            <div>
+                                <h3 className="text-xl font-bold text-white">Senior Front-End Engineer</h3>
+                                <div className="text-yellow-400 font-medium text-lg">ABN AMRO Bank [via TCS]</div>
+                                <div className="text-sm text-gray-500 mt-1">Teams: Multibanking, Front-End CoE</div>
+                            </div>
+                            <div className="text-right mt-2 md:mt-0">
+                                <div className="text-gray-400 font-mono text-sm">Dec 2015 - Nov 2018</div>
+                                <div className="text-gray-500 text-sm">Amsterdam</div>
+                            </div>
+                        </div>
+                        <ul className="list-disc list-outside ml-4 space-y-2 text-gray-400 mb-6 marker:text-yellow-500">
+                            <li>Led front-end development of PSD2 Multibanking application.</li>
+                            <li>Redesigned internal omni-channel front-end framework architecture.</li>
+                            <li>Crafted and evangelized FE framework standards/guidelines.</li>
+                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                            <Badge color="yellow">AngularJS</Badge>
+                            <Badge color="yellow">Vue.js</Badge>
+                            <Badge color="yellow">React</Badge>
+                            <Badge color="yellow">Webpack</Badge>
+                        </div>
+                    </BentoCard>
+
+                    {/* Job 6 */}
+                    <BentoCard className="relative pl-8 md:pl-10">
+                        <div className="absolute top-8 left-0 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                            <div>
+                                <h3 className="text-xl font-bold text-white">Front-End Engineer</h3>
+                                <div className="text-blue-400 font-medium text-lg">Royal Bank of Scotland [via TCS]</div>
+                                <div className="text-sm text-gray-500 mt-1">Mumbai</div>
+                            </div>
+                            <div className="text-right mt-2 md:mt-0">
+                                <div className="text-gray-400 font-mono text-sm">Apr 2012 - Nov 2015</div>
+                                <div className="text-gray-500 text-sm">Mumbai</div>
+                            </div>
+                        </div>
+                        <ul className="list-disc list-outside ml-4 space-y-2 text-gray-400 mb-6 marker:text-blue-500">
+                            <li>Development, maintenance, and support of internet/intranet corporate banking applications.</li>
+                            <li>Information security coordinator for Mumbai offshore center.</li>
+                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                            <Badge color="blue">Javascript</Badge>
+                            <Badge color="blue">HTML/CSS</Badge>
+                            <Badge color="blue">JSP</Badge>
+                        </div>
+                    </BentoCard>
+
                     <div className="pl-10">
-                        <button className="text-emerald-400 hover:text-emerald-300 font-mono text-sm flex items-center gap-2 group cursor-pointer">
+                        <button
+                            onClick={() => window.open('https://linkedin.com/in/divyapgupta', '_blank')}
+                            className="text-emerald-400 hover:text-emerald-300 font-mono text-sm flex items-center gap-2 group cursor-pointer"
+                        >
                             View Full History on LinkedIn <ExternalLink size={14} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>

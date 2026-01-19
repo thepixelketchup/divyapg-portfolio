@@ -24,7 +24,7 @@ export const Navbar = () => {
                     </div>
 
                     <div className="hidden md:flex gap-8 items-center">
-                        {['Home', 'About', 'Experience', 'Skills', 'Contact'].map((item) => (
+                        {['Home', 'About', 'Experience', 'Skills'].map((item) => (
                             <button
                                 key={item}
                                 onClick={() => scrollTo(item.toLowerCase())}
@@ -36,7 +36,10 @@ export const Navbar = () => {
                                 {item}
                             </button>
                         ))}
-                        <button className="px-5 py-2 bg-white text-black text-sm font-bold rounded-full hover:scale-105 transition-transform cursor-pointer">
+                        <button
+                            onClick={() => scrollTo('contact')}
+                            className="px-5 py-2 bg-white text-black text-sm font-bold rounded-full hover:scale-105 transition-transform cursor-pointer"
+                        >
                             Let's Talk
                         </button>
                     </div>
@@ -51,7 +54,7 @@ export const Navbar = () => {
             {isMenuOpen && (
                 <div className="fixed inset-0 z-40 bg-black pt-24 px-6 md:hidden">
                     <div className="flex flex-col gap-6 text-2xl font-light">
-                        {['Home', 'About', 'Experience', 'Skills', 'Contact'].map((item) => (
+                        {['Home', 'About', 'Experience', 'Skills'].map((item) => (
                             <button key={item} onClick={() => scrollTo(item.toLowerCase())} className="text-left py-4 border-b border-white/10 text-white">
                                 {item}
                             </button>

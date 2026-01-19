@@ -32,13 +32,9 @@ export const Contact = () => {
                     </div>
                 </div>
 
-                <footer className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <footer className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col items-center gap-2 text-sm text-gray-500 text-center">
                     <div>© 2025 Divya Prakash Gupta. All rights reserved.</div>
-                    <div className="flex gap-6 mt-4 md:mt-0">
-                        <a href="#" className="hover:text-emerald-500 transition-colors">Github</a>
-                        <a href="#" className="hover:text-emerald-500 transition-colors">LinkedIn</a>
-                        <a href="#" className="hover:text-emerald-500 transition-colors">Email</a>
-                    </div>
+                    <div>Made with Antigravity + Gemini in a couple of hours 🚀</div>
                 </footer>
             </div>
         </section>

@@ -24,10 +24,10 @@ export const About = () => {
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-4">The Curious Explorer</h3>
                             <p className="text-gray-400 leading-relaxed mb-6">
-                                I am a technical all-rounder with a close affinity for design. With over <strong className="text-white">14 years</strong> of experience, I specialize in Frontend and Node.js Backend development within the banking, financial, and e-Classifieds domains.
+                                I am a Senior Full Stack Engineer with over <strong className="text-white">15 years</strong> of experience building high-scale digital solutions in the Banking, Fintech, and eClassifieds domains. I specialize in bridging the gap between complex backend logic and intuitive frontend design, ensuring technical robustness translates into seamless user experiences. I don’t just write code; I use technology to solve problems, optimize performance, and drive measurable business growth.
                             </p>
                             <p className="text-gray-400 leading-relaxed">
-                                Beyond code, I am a creator, entrepreneur, and motivational speaker who loves sharing knowledge and helping others become the best version of themselves.
+                                Beyond the code, I am an active maker, entrepreneur, and mentor, passionate about sharing knowledge and helping people to become the best version of themselves.
                             </p>
 
                             <SmartSummary />
@@ -36,7 +36,7 @@ export const About = () => {
 
                     {/* Stats Cards */}
                     <BentoCard className="md:col-span-1 bg-[#151515] flex flex-col items-center justify-center text-center">
-                        <div className="text-4xl font-bold text-white mb-2">14+</div>
+                        <div className="text-4xl font-bold text-white mb-2">15+</div>
                         <p className="text-sm text-gray-500 uppercase tracking-wider">Years Experience</p>
                     </BentoCard>
 

@@ -24,8 +24,11 @@ export const Hero = () => {
                     </div>
 
                     <h1 className="text-6xl md:text-8xl font-bold leading-tight mb-8 tracking-tight">
-                        Divya Prakash <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-400">
+                            Divya Prakash
+                        </span>
+                        <br />
+                        <span className="text-white">
                             Gupta
                         </span>
                     </h1>
@@ -44,10 +47,7 @@ export const Hero = () => {
                     </div>
 
                     <div className="mt-12 flex items-center gap-6 text-gray-500">
-                        <div className="flex items-center gap-2 hover:text-emerald-400 transition-colors cursor-pointer">
-                            <Github size={20} />
-                        </div>
-                        <div className="flex items-center gap-2 hover:text-emerald-400 transition-colors cursor-pointer">
+                        <div className="flex items-center gap-2 hover:text-emerald-400 transition-colors cursor-pointer" onClick={() => window.open('https://linkedin.com/in/divyapgupta', '_blank')}>
                             <Linkedin size={20} />
                         </div>
                         <div className="h-4 w-px bg-white/20" />
@@ -78,7 +78,7 @@ export const Hero = () => {
                                     <br />
                                     <span className="text-blue-300">role</span>: <span className="text-emerald-400">'Senior Full Stack Engineer'</span>,
                                     <br />
-                                    <span className="text-blue-300">yearsExperience</span>: <span className="text-orange-400">14</span>,
+                                    <span className="text-blue-300">yearsExperience</span>: <span className="text-orange-400">15</span>,
                                     <br />
                                     <span className="text-blue-300">traits</span>: [
                                     <div className="pl-4">
@@ -86,11 +86,14 @@ export const Hero = () => {
                                         <br />
                                         <span className="text-emerald-400">'Design-Driven'</span>,
                                         <br />
-                                        <span className="text-emerald-400">'Technical All-rounder'</span>
+                                        <span className="text-emerald-400">'Technical All-rounder'</span>,
+                                        <br />
+                                        <span className="text-emerald-400">'Entrepreneurial Mindset'</span>
+
                                     </div>
                                     ],
                                     <br />
-                                    <span className="text-blue-300">focus</span>: <span className="text-emerald-400">'High-performance scalable solutions'</span>
+                                    <span className="text-blue-300">focus</span>: <span className="text-emerald-400">'High-performance scalable user-centered digital solutions'</span>
                                 </div>
                                 {'}'};
                             </div>
