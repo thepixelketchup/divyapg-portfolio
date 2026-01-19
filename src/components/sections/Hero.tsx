@@ -8,12 +8,12 @@ export const Hero = () => {
     };
 
     return (
-        <section id="home" className="pt-32 pb-20 px-6 relative overflow-hidden min-h-screen flex items-center">
+        <section id="home" className="sticky top-0 z-0 pt-32 pb-20 px-6 relative overflow-hidden min-h-screen flex flex-col justify-center">
             {/* Abstract Background Shapes */}
             <div className="absolute top-20 right-[-10%] w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div className="max-w-7xl w-full mx-auto grid lg:grid-cols-2 gap-16 items-center">
                 <div className="relative z-10">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-emerald-400 text-sm font-medium mb-8 animate-fade-in-up">
                         <span className="relative flex h-2 w-2">
@@ -23,7 +23,7 @@ export const Hero = () => {
                         Available for new opportunities
                     </div>
 
-                    <h1 className="text-6xl md:text-8xl font-bold leading-tight mb-8 tracking-tight">
+                    <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-8 tracking-tight">
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-400">
                             Divya Prakash
                         </span>
@@ -40,9 +40,6 @@ export const Hero = () => {
                     <div className="flex flex-wrap gap-4">
                         <button onClick={scrollToContact} className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-full transition-all flex items-center gap-2 group cursor-pointer">
                             Contact Me <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-                        </button>
-                        <button onClick={() => window.open('https://linkedin.com/in/divyapgupta', '_blank')} className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold rounded-full transition-all flex items-center gap-2 cursor-pointer">
-                            <Download size={18} /> Download CV
                         </button>
                     </div>
 

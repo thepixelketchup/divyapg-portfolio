@@ -14,7 +14,7 @@ export const AIChatWidget = () => {
     const [messages, setMessages] = useState<Message[]>([
         {
             role: 'assistant',
-            text: "Hi! I'm Divya's AI Agent. How can I help you?\n\nHere are a few things you can ask me:\n• Tell me about Divya's experience\n• What matches Divya's skills?\n• Is Divya available for a project?\n\nAre you reaching out for a project or job opportunity? 🚀"
+            text: "Hi! I'm Divya's AI Agent. How can I help you?\n\nHere are a few things you can ask me:\n• Tell me about Divya's experience\n• What tech stack has Divya worked\n• Is Divya available for a project?\n\nAre you reaching out for a project or job opportunity? 🚀"
         }
     ]);
     const [input, setInput] = useState('');

@@ -6,7 +6,7 @@ import { ExternalLink } from 'lucide-react';
 
 export const Experience = () => {
     return (
-        <section id="experience" className="py-20 px-6 bg-[#0a0a0a]">
+        <section id="experience" className="relative z-20 py-20 px-6 bg-[#0a0a0a]">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">

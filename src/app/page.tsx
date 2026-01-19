@@ -12,12 +12,7 @@ export default function Home() {
       <About />
       <Experience />
       <Skills />
-
-      {/* Job Matcher Section */}
-      <section className="py-20 px-6 bg-[#050505]">
-        <JobMatchAnalyzer />
-      </section>
-
+      <JobMatchAnalyzer />
       <Contact />
     </main>
   );

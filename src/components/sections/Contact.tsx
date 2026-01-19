@@ -4,16 +4,16 @@ import { Linkedin, Mail } from 'lucide-react';
 
 export const Contact = () => {
     return (
-        <section id="contact" className="py-20 px-6">
-            <div className="max-w-7xl mx-auto">
-                <div className="mb-12">
+        <section id="contact" className="sticky top-0 z-50 py-20 px-6 bg-[#0a0a0a] min-h-screen flex flex-col justify-center relative">
+            <div className="max-w-7xl mx-auto w-full">
+                <div className="mb-12 text-left">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
-                        <span className="text-emerald-500 font-mono text-xl">04.</span>
+                        <span className="text-emerald-500 font-mono text-xl">05.</span>
                         What's Next?
                     </h2>
                 </div>
 
-                <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#111] to-[#050505] border border-white/10 rounded-3xl p-12 text-center relative overflow-hidden">
+                <div className="w-full bg-gradient-to-br from-[#111] to-[#050505] border border-white/10 rounded-3xl p-12 text-center relative overflow-hidden">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-emerald-500/5 blur-3xl pointer-events-none" />
 
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">Get In Touch</h2>
@@ -31,12 +31,14 @@ export const Contact = () => {
                         </a>
                     </div>
                 </div>
-
-                <footer className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col items-center gap-2 text-sm text-gray-500 text-center">
-                    <div>© 2025 Divya Prakash Gupta. All rights reserved.</div>
-                    <div>Made with Antigravity + Gemini in a couple of hours 🚀</div>
-                </footer>
             </div>
+
+            <footer className="absolute bottom-6 left-0 w-full text-center text-sm text-gray-500 py-4 border-t border-white/5 bg-[#0a0a0a]/90 backdrop-blur-sm">
+                <div className="flex flex-col gap-2">
+                    <div>© 2025 Divya Prakash Gupta. All rights reserved.</div>
+                    <div>🚀 Made with Antigravity + Gemini in a couple of hours 🚀</div>
+                </div>
+            </footer>
         </section>
     );
 };
