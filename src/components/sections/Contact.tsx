@@ -4,7 +4,7 @@ import { Linkedin, Mail } from 'lucide-react';
 
 export const Contact = () => {
     return (
-        <section id="contact" className="relative md:sticky md:top-0 z-50 py-20 px-6 bg-[#0a0a0a] min-h-screen flex flex-col justify-center">
+        <section id="contact" className="relative z-50 py-20 px-6 bg-[#0a0a0a] min-h-screen flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
                 <div className="mb-12 text-left">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
