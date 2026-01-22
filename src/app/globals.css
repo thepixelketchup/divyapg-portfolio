@@ -57,4 +57,5 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
+  touch-action: pan-x pan-y;
 }
