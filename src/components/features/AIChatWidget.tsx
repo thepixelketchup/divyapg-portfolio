@@ -31,12 +31,12 @@ export const AIChatWidget = () => {
     }, [messages, isOpen]);
 
     useEffect(() => {
-        // Auto-open on desktop after 30 seconds
+        // Auto-open on desktop after 5 seconds
         const timer = setTimeout(() => {
             if (window.innerWidth >= 768) {
                 setIsOpen(true);
             }
-        }, 30000);
+        }, 5000);
 
         return () => clearTimeout(timer);
     }, []);

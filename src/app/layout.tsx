@@ -9,6 +9,7 @@ const publicSans = Public_Sans({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Divya Prakash Gupta | Senior Full Stack Engineer",
   description: "Portfolio of Divya Prakash Gupta - Senior Full Stack Engineer & Curious Explorer.",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0",
 };
 
 export default function RootLayout({
