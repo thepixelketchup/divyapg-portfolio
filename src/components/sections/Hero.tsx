@@ -8,7 +8,7 @@ export const Hero = () => {
     };
 
     return (
-        <section id="home" className="sticky top-0 z-0 pt-32 pb-20 px-6 relative overflow-hidden min-h-screen flex flex-col justify-center">
+        <section id="home" className="relative md:sticky md:top-0 z-0 pt-32 pb-20 px-6 overflow-hidden min-h-screen flex flex-col justify-center">
             {/* Abstract Background Shapes */}
             <div className="absolute top-20 right-[-10%] w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
