@@ -36,7 +36,7 @@ export const Contact = () => {
             <footer className="absolute bottom-6 left-0 w-full text-center text-sm text-gray-500 py-4 border-t border-white/5 bg-[#0a0a0a]/90 backdrop-blur-sm">
                 <div className="flex flex-col gap-2">
                     <div>© 2025 Divya Prakash Gupta. All rights reserved.</div>
-                    <div>🚀 Made with Antigravity + Gemini in a couple of hours 🚀</div>
+                    <div>🚀 Designed, Developed, Tested and Deployed with Google Antigravity + Gemini in a few hours 🚀</div>
                 </div>
             </footer>
         </section>

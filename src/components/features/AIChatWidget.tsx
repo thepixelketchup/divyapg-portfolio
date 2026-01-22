@@ -30,6 +30,17 @@ export const AIChatWidget = () => {
         scrollToBottom();
     }, [messages, isOpen]);
 
+    useEffect(() => {
+        // Auto-open on desktop after 30 seconds
+        const timer = setTimeout(() => {
+            if (window.innerWidth >= 768) {
+                setIsOpen(true);
+            }
+        }, 30000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     const handleSend = async () => {
         if (!input.trim()) return;
 
@@ -84,7 +95,10 @@ export const AIChatWidget = () => {
         <>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full text-black shadow-lg hover:scale-110 transition-transform duration-300 group cursor-pointer"
+                className={cn(
+                    "fixed bottom-6 right-6 z-50 p-4 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full text-black shadow-lg hover:scale-110 transition-transform duration-300 group cursor-pointer",
+                    isOpen ? "hidden md:flex" : "flex"
+                )}
             >
                 {isOpen ? <X size={24} /> : <MessageSquare size={24} className="fill-current" />}
                 {!isOpen && (
@@ -96,18 +110,27 @@ export const AIChatWidget = () => {
             </button>
 
             {isOpen && (
-                <div className="fixed bottom-24 right-6 z-50 w-80 md:w-96 h-[500px] md:h-[600px] max-h-[70vh] md:max-h-[80vh] bg-[#111] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
-                    <div className="p-4 bg-gradient-to-r from-emerald-900/40 to-cyan-900/40 border-b border-white/5 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center">
-                            <Bot size={18} className="text-black" />
+                <div className="fixed inset-0 md:inset-auto md:bottom-24 md:right-6 z-50 w-full h-full md:w-96 md:h-[600px] md:max-h-[80vh] bg-[#111] border-0 md:border md:border-white/10 md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
+                    <div className="p-4 bg-gradient-to-r from-emerald-900/40 to-cyan-900/40 border-b border-white/5 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center">
+                                <Bot size={18} className="text-black" />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-white text-sm">Divya's AI Agent</h3>
+                                <p className="text-xs text-emerald-400 flex items-center gap-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                    Online
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 className="font-bold text-white text-sm">Divya's AI Agent</h3>
-                            <p className="text-xs text-emerald-400 flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                Online
-                            </p>
-                        </div>
+                        {/* Mobile Close Button */}
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
+                        >
+                            <X size={24} />
+                        </button>
                     </div>
 
                     <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
