@@ -13,7 +13,7 @@ export const viewport: Viewport = {
 };
 
 // Set NEXT_PUBLIC_SITE_URL in your environment to the real deployed domain.
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
 const TITLE = "Divya Prakash Gupta | Senior Full Stack Engineer";
 const DESCRIPTION = "Portfolio of Divya Prakash Gupta - Senior Full Stack Engineer & Curious Explorer.";
 
