@@ -62,7 +62,7 @@ export const JobMatchAnalyzer = () => {
                         </div>
                         <div>
                             <h2 className="text-2xl font-bold text-white">Paste your JD below</h2>
-                            <p className="text-gray-400 text-sm">I'll check if I'm the right fit for your team.</p>
+                            <p className="text-gray-400 text-sm">I&apos;ll check if I&apos;m the right fit for your team.</p>
                         </div>
                     </div>
 
@@ -123,7 +123,7 @@ export const JobMatchAnalyzer = () => {
 
                                     {/* Analysis */}
                                     <p className="text-sm text-gray-300 italic border-l-2 border-emerald-500/30 pl-3">
-                                        "{result.analysis}"
+                                        &quot;{result.analysis}&quot;
                                     </p>
 
                                     {/* Skills Breakdown */}

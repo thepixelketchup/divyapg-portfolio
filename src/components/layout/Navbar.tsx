@@ -2,11 +2,35 @@
 
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const SECTION_IDS = ['home', 'about', 'experience', 'skills'];
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
+
+    useEffect(() => {
+        const sections = SECTION_IDS
+            .map(id => document.getElementById(id))
+            .filter((el): el is HTMLElement => el !== null);
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visible = entries
+                    .filter(entry => entry.isIntersecting)
+                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+                if (visible) {
+                    setActiveSection(visible.target.id);
+                }
+            },
+            { rootMargin: '-40% 0px -40% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+        );
+
+        sections.forEach(section => observer.observe(section));
+        return () => observer.disconnect();
+    }, []);
 
     const scrollTo = (id: string) => {
         setIsMenuOpen(false);
@@ -40,7 +64,7 @@ export const Navbar = () => {
                             onClick={() => scrollTo('contact')}
                             className="px-5 py-2 bg-white text-black text-sm font-bold rounded-full hover:scale-105 transition-transform cursor-pointer"
                         >
-                            Let's Talk
+                            Let&apos;s Talk
                         </button>
                     </div>
 

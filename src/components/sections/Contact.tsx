@@ -9,7 +9,7 @@ export const Contact = () => {
                 <div className="mb-12 text-left">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
                         <span className="text-emerald-500 font-mono text-xl">05.</span>
-                        What's Next?
+                        What&apos;s Next?
                     </h2>
                 </div>
 
@@ -18,7 +18,7 @@ export const Contact = () => {
 
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">Get In Touch</h2>
                     <p className="text-xl text-gray-400 mb-10 max-w-xl mx-auto relative z-10">
-                        I'm currently open to new opportunities. Whether you have a question about my stack,
+                        I&apos;m currently open to new opportunities. Whether you have a question about my stack,
                         want to discuss a project, or just want to say hi, my inbox is always open.
                     </p>
 
@@ -35,8 +35,8 @@ export const Contact = () => {
 
             <footer className="absolute bottom-6 left-0 w-full text-center text-sm text-gray-500 py-4 border-t border-white/5 bg-[#0a0a0a]/90 backdrop-blur-sm">
                 <div className="flex flex-col gap-2">
-                    <div>© 2025 Divya Prakash Gupta. All rights reserved.</div>
-                    <div>🚀 Designed, Developed, Tested and Deployed with Google Antigravity + Gemini in a few hours 🚀</div>
+                    <div>© {new Date().getFullYear()} Divya Prakash Gupta. All rights reserved.</div>
+                    <div>Built with Google Antigravity + Gemini.</div>
                 </div>
             </footer>
         </section>

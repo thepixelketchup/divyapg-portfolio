@@ -28,7 +28,8 @@ export const SmartSummary = () => {
             } else {
                 setSummary("Unable to generate summary. Please try again.");
             }
-        } catch (e) {
+        } catch (error) {
+            console.error('Summary request failed:', error);
             setSummary("Could not generate summary at this time.");
         } finally {
             setLoading(false);
@@ -72,7 +73,7 @@ export const SmartSummary = () => {
                         </div>
                     ) : (
                         <p className="text-gray-200 leading-relaxed italic text-base">
-                            "{summary}"
+                            &quot;{summary}&quot;
                         </p>
                     )}
                 </div>

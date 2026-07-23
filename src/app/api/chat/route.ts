@@ -1,9 +1,22 @@
 import { RESUME_CONTENT } from '@/data/resume';
+import { getClientIp, rateLimit } from '@/lib/rateLimit';
 import { NextResponse } from 'next/server';
+
+const MAX_MESSAGES = 40;
+const MAX_MESSAGE_LENGTH = 2000;
 
 export async function POST(req: Request) {
     try {
+        const ip = getClientIp(req);
+        if (!rateLimit(`chat:${ip}`, 20, 5 * 60 * 1000)) {
+            return NextResponse.json({ text: "Whoa, slow down! 🚦 Too many messages — please wait a bit before trying again." }, { status: 429 });
+        }
+
         const { messages } = await req.json();
+
+        if (!Array.isArray(messages) || messages.length > MAX_MESSAGES || messages.some((m: { text?: string }) => typeof m.text === 'string' && m.text.length > MAX_MESSAGE_LENGTH)) {
+            return NextResponse.json({ text: "That message (or conversation) is too long for me to process." }, { status: 400 });
+        }
 
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) {
@@ -70,7 +83,8 @@ General Rules:
             body: JSON.stringify({
                 systemInstruction,
                 contents: formattedContents
-            })
+            }),
+            signal: AbortSignal.timeout(15_000)
         });
 
         const data = await response.json();
@@ -92,6 +106,11 @@ General Rules:
         return NextResponse.json({ text: text || "My mind went blank! 😶 Could you say that again?" });
     } catch (error) {
         console.error('Chat API Error:', error);
-        return NextResponse.json({ text: "Internal Server Error" }, { status: 500 });
+        const isTimeout = error instanceof Error && error.name === 'TimeoutError';
+        return NextResponse.json({
+            text: isTimeout
+                ? "That's taking longer than usual to respond. Please try again in a moment! ⏳"
+                : "Internal Server Error"
+        }, { status: 500 });
     }
 }

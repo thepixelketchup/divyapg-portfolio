@@ -10,7 +10,7 @@ About Me:
 A curious explorer who is a technical allrounder with close affinity towards design. Passionate about learning new technologies. Positive and full of energy, loves new challenges and strives for excellence. Likes sharing knowledge and motivating people to be the best version of themselves. Creator, entrepreneur, motivational speaker and multi-tasker.
 
 Professional Summary:
-Senior Full Stack Engineer with 14 years of experience specializing in Frontend and Node.js Backend development within banking, financial, and eClassifieds domain. Known for delivering impactful user-centered digital solutions that blend design-thinking and technology. Proven record of increasing user engagement, optimizing performance, and driving product growth through A/B testing. Excel in fast-paced environments, delivering high-quality, scalable solutions.
+Senior Full Stack Engineer with 15 years of experience specializing in Frontend and Node.js Backend development within banking, financial, and eClassifieds domain. Known for delivering impactful user-centered digital solutions that blend design-thinking and technology. Proven record of increasing user engagement, optimizing performance, and driving product growth through A/B testing. Excel in fast-paced environments, delivering high-quality, scalable solutions.
 
 Experience:
 

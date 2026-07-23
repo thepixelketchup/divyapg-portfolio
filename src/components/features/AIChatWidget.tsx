@@ -32,17 +32,6 @@ export const AIChatWidget = () => {
         scrollToBottom();
     }, [messages, isOpen]);
 
-    useEffect(() => {
-        // Auto-open on desktop after 5 seconds
-        const timer = setTimeout(() => {
-            if (window.innerWidth >= 768) {
-                setIsOpen(true);
-            }
-        }, 5000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
     const handleSend = async () => {
         if (!input.trim()) return;
 
@@ -81,6 +70,7 @@ export const AIChatWidget = () => {
 
             setMessages(prev => [...prev, { role: 'assistant', text: aiResponse }]);
         } catch (error) {
+            console.error('Chat request failed:', error);
             setMessages(prev => [...prev, { role: 'assistant', text: "Sorry, I encountered an error. Please try again." }]);
         } finally {
             setIsLoading(false);
@@ -147,7 +137,7 @@ export const AIChatWidget = () => {
                                 <Bot size={18} className="text-black" />
                             </div>
                             <div>
-                                <h3 className="font-bold text-white text-sm">Divya's AI Agent</h3>
+                                <h3 className="font-bold text-white text-sm">Divya&apos;s AI Agent</h3>
                                 <p className="text-xs text-emerald-400 flex items-center gap-1">
                                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                                     Online

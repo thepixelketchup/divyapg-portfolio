@@ -1,8 +1,12 @@
 "use client";
 
-import { ArrowRight, Database, Download, Github, Linkedin, MapPin, Zap } from 'lucide-react';
+import { CVRequestModal } from '@/components/features/CVRequestModal';
+import { ArrowRight, Database, Download, Linkedin, MapPin, Zap } from 'lucide-react';
+import { useState } from 'react';
 
 export const Hero = () => {
+    const [isCvModalOpen, setIsCvModalOpen] = useState(false);
+
     const scrollToContact = () => {
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -41,7 +45,12 @@ export const Hero = () => {
                         <button onClick={scrollToContact} className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-full transition-all flex items-center gap-2 group cursor-pointer">
                             Contact Me <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
                         </button>
+                        <button onClick={() => setIsCvModalOpen(true)} className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-full border border-white/10 transition-all flex items-center gap-2 cursor-pointer">
+                            <Download size={18} /> Request CV
+                        </button>
                     </div>
+
+                    <CVRequestModal isOpen={isCvModalOpen} onClose={() => setIsCvModalOpen(false)} />
 
                     <div className="mt-12 flex items-center gap-6 text-gray-500">
                         <div className="flex items-center gap-2 hover:text-emerald-400 transition-colors cursor-pointer" onClick={() => window.open('https://linkedin.com/in/divyapgupta', '_blank')}>
@@ -71,26 +80,26 @@ export const Hero = () => {
                             <div className="bg-[#111] p-6 rounded-b-xl border border-white/10 shadow-2xl font-mono text-sm leading-relaxed text-gray-300">
                                 <span className="text-purple-400">const</span> <span className="text-yellow-400">developer</span> = {'{'}
                                 <div className="pl-4">
-                                    <span className="text-blue-300">name</span>: <span className="text-emerald-400">'Divya Prakash Gupta'</span>,
+                                    <span className="text-blue-300">name</span>: <span className="text-emerald-400">&apos;Divya Prakash Gupta&apos;</span>,
                                     <br />
-                                    <span className="text-blue-300">role</span>: <span className="text-emerald-400">'Senior Full Stack Engineer'</span>,
+                                    <span className="text-blue-300">role</span>: <span className="text-emerald-400">&apos;Senior Full Stack Engineer&apos;</span>,
                                     <br />
                                     <span className="text-blue-300">yearsExperience</span>: <span className="text-orange-400">15</span>,
                                     <br />
                                     <span className="text-blue-300">traits</span>: [
                                     <div className="pl-4">
-                                        <span className="text-emerald-400">'Curious Explorer'</span>,
+                                        <span className="text-emerald-400">&apos;Curious Explorer&apos;</span>,
                                         <br />
-                                        <span className="text-emerald-400">'Design-Driven'</span>,
+                                        <span className="text-emerald-400">&apos;Design-Driven&apos;</span>,
                                         <br />
-                                        <span className="text-emerald-400">'Technical All-rounder'</span>,
+                                        <span className="text-emerald-400">&apos;Technical All-rounder&apos;</span>,
                                         <br />
-                                        <span className="text-emerald-400">'Entrepreneurial Mindset'</span>
+                                        <span className="text-emerald-400">&apos;Entrepreneurial Mindset&apos;</span>
 
                                     </div>
                                     ],
                                     <br />
-                                    <span className="text-blue-300">focus</span>: <span className="text-emerald-400">'High-performance scalable user-centered digital solutions'</span>
+                                    <span className="text-blue-300">focus</span>: <span className="text-emerald-400">&apos;High-performance scalable user-centered digital solutions&apos;</span>
                                 </div>
                                 {'}'};
                             </div>
