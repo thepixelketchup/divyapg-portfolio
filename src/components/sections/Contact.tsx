@@ -36,7 +36,7 @@ export const Contact = () => {
             <footer className="absolute bottom-6 left-0 w-full text-center text-sm text-gray-500 py-4 border-t border-white/5 bg-[#0a0a0a]/90 backdrop-blur-sm">
                 <div className="flex flex-col gap-2">
                     <div>© {new Date().getFullYear()} Divya Prakash Gupta. All rights reserved.</div>
-                    <div>Built with Google Antigravity + Gemini.</div>
+                    <div>Powered by an AI-native workflow — Google Antigravity for orchestration, Gemini for reasoning.</div>
                 </div>
             </footer>
         </section>
