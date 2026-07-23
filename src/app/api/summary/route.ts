@@ -1,4 +1,5 @@
 import { RESUME_CONTENT } from '@/data/resume';
+import { fetchGemini } from '@/lib/geminiFetch';
 import { getClientIp, rateLimit } from '@/lib/rateLimit';
 import { NextResponse } from 'next/server';
 
@@ -29,21 +30,14 @@ export async function POST(req: Request) {
             }]
         };
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                systemInstruction,
-                contents: [{
-                    parts: [{
-                        text: `Generate a concise, impactful 2-sentence professional summary of Divya's resume specifically tailored for a ${targetRole}. Focus on what matters most to a ${targetRole}.`
-                    }]
+        const data = await fetchGemini(apiKey, {
+            systemInstruction,
+            contents: [{
+                parts: [{
+                    text: `Generate a concise, impactful 2-sentence professional summary of Divya's resume specifically tailored for a ${targetRole}. Focus on what matters most to a ${targetRole}.`
                 }]
-            }),
-            signal: AbortSignal.timeout(15_000)
+            }]
         });
-
-        const data = await response.json();
 
         if (data.error) {
             console.error("Gemini API Error:", data.error);

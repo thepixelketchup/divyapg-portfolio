@@ -1,6 +1,6 @@
 "use client";
 
-import { Briefcase, CheckCircle2, FileText, Loader2, Sparkles } from 'lucide-react';
+import { Briefcase, CheckCircle2, FileText, Loader2, Sparkles, TriangleAlert } from 'lucide-react';
 import { useState } from 'react';
 
 interface JobMatchResult {
@@ -10,15 +10,19 @@ interface JobMatchResult {
     missingSkills: string[];
 }
 
+const MAX_JD_LENGTH = 6000;
+
 export const JobMatchAnalyzer = () => {
     const [jdText, setJdText] = useState('');
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<JobMatchResult | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const analyzeJob = async () => {
         if (!jdText.trim()) return;
         setLoading(true);
         setResult(null);
+        setError(null);
 
         try {
             const response = await fetch('/api/job-match', {
@@ -30,10 +34,12 @@ export const JobMatchAnalyzer = () => {
             const data = await response.json();
             if (data.result) {
                 setResult(data.result);
+            } else {
+                setError(data.error || "Analysis failed. Please try again.");
             }
-        } catch (error) {
-            console.error(error);
-            alert("Analysis failed. Please try again.");
+        } catch (err) {
+            console.error(err);
+            setError("Analysis failed. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -73,8 +79,10 @@ export const JobMatchAnalyzer = () => {
                                 value={jdText}
                                 onChange={(e) => setJdText(e.target.value)}
                                 placeholder="Paste Job Description here..."
+                                maxLength={MAX_JD_LENGTH}
                                 className="w-full h-48 bg-black/50 border border-white/10 rounded-xl p-4 text-sm text-gray-300 focus:outline-none focus:border-emerald-500/50 resize-none custom-scrollbar"
                             />
+                            <p className="text-xs text-gray-500 text-right -mt-2">{jdText.length}/{MAX_JD_LENGTH}</p>
                             <button
                                 onClick={analyzeJob}
                                 disabled={loading || !jdText.trim()}
@@ -87,10 +95,17 @@ export const JobMatchAnalyzer = () => {
 
                         {/* Results Area */}
                         <div className="bg-black/30 rounded-xl border border-white/5 p-6 min-h-[250px] flex items-center justify-center relative">
-                            {!result && !loading && (
+                            {!result && !loading && !error && (
                                 <div className="text-center text-gray-500">
                                     <FileText size={48} className="mx-auto mb-3 opacity-20" />
                                     <p>Results will appear here</p>
+                                </div>
+                            )}
+
+                            {!result && !loading && error && (
+                                <div className="text-center text-red-400 animate-in fade-in">
+                                    <TriangleAlert size={48} className="mx-auto mb-3 opacity-50" />
+                                    <p>{error}</p>
                                 </div>
                             )}
 

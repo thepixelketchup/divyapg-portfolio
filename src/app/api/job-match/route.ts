@@ -1,4 +1,5 @@
 import { RESUME_CONTENT } from '@/data/resume';
+import { fetchGemini } from '@/lib/geminiFetch';
 import { getClientIp, rateLimit } from '@/lib/rateLimit';
 import { NextResponse } from 'next/server';
 
@@ -40,39 +41,42 @@ Output STRICT JSON format:
             }]
         };
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                systemInstruction,
-                contents: [{ parts: [{ text: `Job Description to analyze: ${jdText}` }] }],
-                generationConfig: { responseMimeType: "application/json" }
-            }),
-            signal: AbortSignal.timeout(15_000)
-        });
+        const requestBody = {
+            systemInstruction,
+            contents: [{ parts: [{ text: `Job Description to analyze: ${jdText}` }] }],
+            generationConfig: { responseMimeType: "application/json", maxOutputTokens: 1024 }
+        };
 
-        const data = await response.json();
+        // Gemini occasionally truncates/malforms the JSON output even with responseMimeType
+        // set — that's a fresh generation issue, not a transient network error, so it needs
+        // its own retry on top of fetchGemini's transient-error retry.
+        const PARSE_RETRY_ATTEMPTS = 2;
+        let lastParseError: unknown = null;
 
-        if (data.error) {
-            console.error("Gemini API Error:", data.error);
-            return NextResponse.json({ error: "The AI service is temporarily unavailable. Please try again shortly." }, { status: 503 });
-        }
+        for (let attempt = 0; attempt < PARSE_RETRY_ATTEMPTS; attempt++) {
+            const data = await fetchGemini(apiKey, requestBody);
 
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (data.error) {
+                console.error("Gemini API Error:", data.error);
+                return NextResponse.json({ error: "The AI service is temporarily unavailable. Please try again shortly." }, { status: 503 });
+            }
 
-        if (text) {
+            const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (!text) continue;
+
             // Clean up potential markdown code blocks if the model ignores the instruction
             const cleanText = text.replace(/```json/g, '').replace(/```/g, '').trim();
             try {
                 const result = JSON.parse(cleanText);
                 return NextResponse.json({ result });
             } catch (parseError) {
+                lastParseError = parseError;
                 console.error('Job Match Parse Error:', parseError, cleanText);
-                return NextResponse.json({ error: "Received an unexpected response. Please try again." }, { status: 502 });
             }
         }
 
-        return NextResponse.json({ error: "Failed to generate analysis" }, { status: 500 });
+        console.error('Job Match failed after retries:', lastParseError);
+        return NextResponse.json({ error: "Received an unexpected response. Please try again." }, { status: 502 });
 
     } catch (error) {
         console.error('Job Match API Error:', error);

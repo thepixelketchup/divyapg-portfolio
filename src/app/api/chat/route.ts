@@ -1,4 +1,5 @@
 import { RESUME_CONTENT } from '@/data/resume';
+import { fetchGemini } from '@/lib/geminiFetch';
 import { getClientIp, rateLimit } from '@/lib/rateLimit';
 import { NextResponse } from 'next/server';
 
@@ -77,17 +78,10 @@ General Rules:
             parts: [{ text: m.text }]
         }));
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                systemInstruction,
-                contents: formattedContents
-            }),
-            signal: AbortSignal.timeout(15_000)
+        const data = await fetchGemini(apiKey, {
+            systemInstruction,
+            contents: formattedContents
         });
-
-        const data = await response.json();
 
         if (data.error) {
             console.error("Gemini API Error:", data.error);
