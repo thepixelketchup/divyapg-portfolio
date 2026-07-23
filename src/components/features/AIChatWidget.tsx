@@ -225,7 +225,7 @@ export const AIChatWidget = () => {
                                     )}
                                 </button>
                                 <a
-                                    href="https://calendly.com/divyapgupta"
+                                    href="https://calendar.app.google/iLErRMDBdB9MQepw"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="w-full py-3 px-4 bg-white/10 text-white font-medium rounded-xl hover:bg-white/20 transition-colors flex items-center justify-center gap-2 border border-white/10"
