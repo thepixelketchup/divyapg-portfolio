@@ -1,5 +1,4 @@
 import { getClientIp, rateLimit } from '@/lib/rateLimit';
-import { isPlausibleLinkedinMatch } from '@/lib/verifyLinkedin';
 import { withTimeout } from '@/lib/withTimeout';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
@@ -46,16 +45,11 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Email service is not configured." }, { status: 500 });
         }
 
-        const matched = isPlausibleLinkedinMatch(name, linkedinUrl);
         const cvUrl = `${new URL(req.url).origin}/Divya-Prakash-Gupta-CV-2026-v0.1.pdf`;
 
         const resend = new Resend(apiKey);
 
         const emailBody = `A new CV request came in from the portfolio site.
-
-========================================
-LINKEDIN MATCH CHECK: ${matched ? 'PASSED (name plausibly matches LinkedIn slug)' : 'DID NOT PASS - verify manually before sending anything'}
-========================================
 
 Name: ${name}
 Email: ${email}
@@ -69,7 +63,7 @@ Opportunity Details:
 ${roleDetails}
 
 ========================================
-CV file link (send this to the requester once verified): ${cvUrl}
+CV file link (send this to the requester once you've verified them): ${cvUrl}
 ========================================
 
 Reply to this email to respond directly to ${email}.
@@ -82,7 +76,7 @@ Sent automatically from Divya's Portfolio CV Request form. No email or file was 
                 from: 'Portfolio CV Requests <onboarding@resend.dev>',
                 to: ['divya@thecuriousbunny.nl'],
                 replyTo: email,
-                subject: `CV Request from ${name}${matched ? '' : ' (LinkedIn match unverified)'}`,
+                subject: `CV Request from ${name}`,
                 text: emailBody,
             }),
             10_000,

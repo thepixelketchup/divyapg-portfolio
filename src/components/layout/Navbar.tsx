@@ -34,7 +34,13 @@ export const Navbar = () => {
 
     const scrollTo = (id: string) => {
         setIsMenuOpen(false);
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        if (id === 'home') {
+            // Hero is `position: sticky`, so once scrolled past, its bounding rect already
+            // reads top:0 and scrollIntoView becomes a no-op — scroll the window directly instead.
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
         setActiveSection(id);
     };
 

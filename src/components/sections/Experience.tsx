@@ -19,7 +19,7 @@ export const Experience = () => {
 
                     {/* Job 1 */}
                     <BentoCard className="relative pl-8 md:pl-10">
-                        <div className="absolute top-8 left-0 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
+                        <div className="absolute top-8 left-3 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
                         <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-white">Senior Full Stack Engineer (Freelance)</h3>
@@ -48,7 +48,7 @@ export const Experience = () => {
 
                     {/* Job 2 */}
                     <BentoCard className="relative pl-8 md:pl-10">
-                        <div className="absolute top-8 left-0 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
+                        <div className="absolute top-8 left-3 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
                         <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-white">Senior Full Stack Engineer</h3>
@@ -76,7 +76,7 @@ export const Experience = () => {
 
                     {/* Job 3 */}
                     <BentoCard className="relative pl-8 md:pl-10">
-                        <div className="absolute top-8 left-0 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
+                        <div className="absolute top-8 left-3 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
                         <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-white">Senior Full Stack Engineer (Freelance)</h3>
@@ -103,7 +103,7 @@ export const Experience = () => {
 
                     {/* Job 4 */}
                     <BentoCard className="relative pl-8 md:pl-10">
-                        <div className="absolute top-8 left-0 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
+                        <div className="absolute top-8 left-3 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
                         <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-white">Senior Front-End Engineer</h3>
@@ -129,7 +129,7 @@ export const Experience = () => {
 
                     {/* Job 5 */}
                     <BentoCard className="relative pl-8 md:pl-10">
-                        <div className="absolute top-8 left-0 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
+                        <div className="absolute top-8 left-3 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
                         <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-white">Senior Front-End Engineer</h3>
@@ -156,7 +156,7 @@ export const Experience = () => {
 
                     {/* Job 6 */}
                     <BentoCard className="relative pl-8 md:pl-10">
-                        <div className="absolute top-8 left-0 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
+                        <div className="absolute top-8 left-3 w-4 h-4 rounded-full bg-[#0a0a0a] border-2 border-emerald-500 z-10" />
                         <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 className="text-xl font-bold text-white">Front-End Engineer</h3>

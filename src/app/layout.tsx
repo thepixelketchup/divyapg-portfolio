@@ -1,4 +1,5 @@
 import { AIChatWidget } from "@/components/features/AIChatWidget";
+import { CVRequestModalProvider } from "@/components/features/CVRequestModal";
 import { Navbar } from "@/components/layout/Navbar";
 import type { Metadata, Viewport } from "next";
 import { Public_Sans } from "next/font/google";
@@ -58,9 +59,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <Navbar />
-        {children}
-        <AIChatWidget />
+        <CVRequestModalProvider>
+          <Navbar />
+          {children}
+          <AIChatWidget />
+        </CVRequestModalProvider>
       </body>
     </html>
   );

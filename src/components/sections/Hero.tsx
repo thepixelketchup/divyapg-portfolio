@@ -1,11 +1,10 @@
 "use client";
 
-import { CVRequestModal } from '@/components/features/CVRequestModal';
+import { useCVRequestModal } from '@/components/features/CVRequestModal';
 import { ArrowRight, Database, Download, Linkedin, MapPin, Zap } from 'lucide-react';
-import { useState } from 'react';
 
 export const Hero = () => {
-    const [isCvModalOpen, setIsCvModalOpen] = useState(false);
+    const { open: openCvModal } = useCVRequestModal();
 
     const scrollToContact = () => {
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -45,12 +44,10 @@ export const Hero = () => {
                         <button onClick={scrollToContact} className="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-full transition-all flex items-center gap-2 group cursor-pointer">
                             Contact Me <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
                         </button>
-                        <button onClick={() => setIsCvModalOpen(true)} className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-full border border-white/10 transition-all flex items-center gap-2 cursor-pointer">
+                        <button onClick={openCvModal} className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-full border border-white/10 transition-all flex items-center gap-2 cursor-pointer">
                             <Download size={18} /> Request CV
                         </button>
                     </div>
-
-                    <CVRequestModal isOpen={isCvModalOpen} onClose={() => setIsCvModalOpen(false)} />
 
                     <div className="mt-12 flex items-center gap-6 text-gray-500">
                         <div className="flex items-center gap-2 hover:text-emerald-400 transition-colors cursor-pointer" onClick={() => window.open('https://linkedin.com/in/divyapgupta', '_blank')}>
