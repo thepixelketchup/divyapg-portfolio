@@ -10,27 +10,29 @@ export async function POST(req: Request) {
             return NextResponse.json({ text: "API key not configured." }, { status: 500 });
         }
 
-        const prompt = `
-        Role: Senior Tech Recruiter.
-        Task: Analyze the fit between Divya's Resume and the User's Job Description (JD).
-        
-        Resume: ${RESUME_CONTENT}
-        Job Description: ${jdText}
+        const systemInstruction = {
+            parts: [{
+                text: `Role: Senior Tech Recruiter.
+Task: Analyze the fit between Divya's Resume and the User's Job Description (JD).
 
-        Output STRICT JSON format (no markdown code blocks):
-        {
-          "matchScore": number (0-100),
-          "analysis": "2 sentence professional analysis of fit",
-          "matchingSkills": ["skill1", "skill2", ...],
-          "missingSkills": ["skill1", "skill2", ...]
-        }
-      `;
+Resume: ${RESUME_CONTENT}
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
+Output STRICT JSON format:
+{
+  "matchScore": number (0-100),
+  "analysis": "2 sentence professional analysis of fit",
+  "matchingSkills": ["skill1", "skill2", ...],
+  "missingSkills": ["skill1", "skill2", ...]
+}`
+            }]
+        };
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction,
+                contents: [{ parts: [{ text: `Job Description to analyze: ${jdText}` }] }],
                 generationConfig: { responseMimeType: "application/json" }
             })
         });

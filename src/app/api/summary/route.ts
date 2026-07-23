@@ -10,12 +10,23 @@ export async function POST(req: Request) {
             return NextResponse.json({ text: "API key not configured." }, { status: 500 });
         }
 
-        const prompt = `Act as Divya. Generate a concise, impactful 2-sentence professional summary of Divya's resume specifically tailored for a ${targetRole}. Focus on what matters most to a ${targetRole}. Resume: ${RESUME_CONTENT}`;
+        const systemInstruction = {
+            parts: [{
+                text: `Act as Divya. Resume: ${RESUME_CONTENT}`
+            }]
+        };
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            body: JSON.stringify({
+                systemInstruction,
+                contents: [{
+                    parts: [{
+                        text: `Generate a concise, impactful 2-sentence professional summary of Divya's resume specifically tailored for a ${targetRole}. Focus on what matters most to a ${targetRole}.`
+                    }]
+                }]
+            })
         });
 
         const data = await response.json();
