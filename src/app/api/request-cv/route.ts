@@ -25,7 +25,7 @@ export async function POST(req: Request) {
         const body = await req.json();
         const { name, email, phone, linkedinUrl, company, roleDetails, startDate, budget } = body || {};
 
-        if (!name || !email || !phone || !linkedinUrl || !company || !roleDetails) {
+        if (!name || !email || !phone || !linkedinUrl || !company || !roleDetails || !startDate || !budget) {
             return NextResponse.json({ error: "Please fill in all required fields." }, { status: 400 });
         }
 
@@ -56,8 +56,8 @@ Email: ${email}
 Phone: ${phone}
 LinkedIn: ${linkedinUrl}
 Company/Client: ${company}
-Start Date: ${startDate || 'Not provided'}
-Budget: ${budget || 'Not provided'}
+Start Date: ${startDate}
+Budget: ${budget}
 
 Opportunity Details:
 ${roleDetails}
