@@ -20,6 +20,8 @@ export const AIChatWidget = () => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [emailDraft, setEmailDraft] = useState<string | null>(null);
+    const [isSendingEmail, setIsSendingEmail] = useState(false);
+    const [emailSentStatus, setEmailSentStatus] = useState<'idle' | 'sent' | 'error'>('idle');
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -49,6 +51,7 @@ export const AIChatWidget = () => {
         setInput('');
         setIsLoading(true);
         setEmailDraft(null);
+        setEmailSentStatus('idle');
 
         try {
             const response = await fetch('/api/chat', {
@@ -84,11 +87,38 @@ export const AIChatWidget = () => {
         }
     };
 
-    const handleLaunchEmail = () => {
-        if (!emailDraft) return;
+    const fallbackMailto = (draft: string) => {
         const subject = encodeURIComponent("Project Opportunity for Divya (via AI Assistant)");
-        const body = encodeURIComponent(`Hi Divya,\n\nI had a chat with your AI assistant about a potential opportunity. Here are the details we discussed:\n\n${emailDraft}\n\nLet's connect soon!`);
+        const body = encodeURIComponent(`Hi Divya,\n\nI had a chat with your AI assistant about a potential opportunity. Here are the details we discussed:\n\n${draft}\n\nLet's connect soon!`);
         window.location.href = `mailto:divya@thecuriousbunny.nl?subject=${subject}&body=${body}`;
+    };
+
+    const handleLaunchEmail = async () => {
+        if (!emailDraft || isSendingEmail) return;
+        setIsSendingEmail(true);
+        setEmailSentStatus('idle');
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ emailDraft, messages })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                setEmailSentStatus('sent');
+            } else {
+                console.warn("Resend API not fully configured or failed, using mailto fallback:", data.error);
+                fallbackMailto(emailDraft);
+            }
+        } catch (err) {
+            console.error("Error calling send-email API:", err);
+            fallbackMailto(emailDraft);
+        } finally {
+            setIsSendingEmail(false);
+        }
     };
 
     return (
@@ -172,9 +202,27 @@ export const AIChatWidget = () => {
                             <div className="flex flex-col gap-2 mt-2 animate-in fade-in slide-in-from-bottom-2">
                                 <button
                                     onClick={handleLaunchEmail}
-                                    className="w-full py-3 px-4 bg-emerald-500 text-black font-bold rounded-xl hover:bg-emerald-400 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                                    disabled={isSendingEmail || emailSentStatus === 'sent'}
+                                    className={cn(
+                                        "w-full py-3 px-4 font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer",
+                                        emailSentStatus === 'sent'
+                                            ? "bg-emerald-600 text-white cursor-default"
+                                            : "bg-emerald-500 text-black hover:bg-emerald-400 disabled:opacity-75"
+                                    )}
                                 >
-                                    <Mail size={18} /> Send Details to Divya
+                                    {isSendingEmail ? (
+                                        <>
+                                            <Loader2 size={18} className="animate-spin" /> Sending to Divya...
+                                        </>
+                                    ) : emailSentStatus === 'sent' ? (
+                                        <>
+                                            <Sparkles size={18} /> Details Sent to Divya!
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Mail size={18} /> Send Details to Divya
+                                        </>
+                                    )}
                                 </button>
                                 <a
                                     href="https://calendly.com/divyapgupta"
