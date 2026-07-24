@@ -1,7 +1,21 @@
 import { RESUME_CONTENT } from '@/data/resume';
 import { fetchGemini } from '@/lib/geminiFetch';
+import { repairTruncatedJson } from '@/lib/jsonRepair';
 import { getClientIp, rateLimit } from '@/lib/rateLimit';
 import { NextResponse } from 'next/server';
+
+interface JobMatchResult {
+    matchScore: number;
+    analysis: string;
+    matchingSkills?: string[];
+    missingSkills?: string[];
+}
+
+function isValidJobMatchResult(value: unknown): value is JobMatchResult {
+    if (!value || typeof value !== 'object') return false;
+    const v = value as Record<string, unknown>;
+    return typeof v.matchScore === 'number' && typeof v.analysis === 'string';
+}
 
 const MAX_JD_LENGTH = 6000;
 
@@ -70,6 +84,17 @@ Output STRICT JSON format:
                 const result = JSON.parse(cleanText);
                 return NextResponse.json({ result });
             } catch (parseError) {
+                // Gemini occasionally reports finishReason: STOP with invalid JSON (missing a
+                // closing bracket, or cut off mid-string) — try to salvage it before retrying.
+                try {
+                    const repaired = JSON.parse(repairTruncatedJson(cleanText));
+                    if (isValidJobMatchResult(repaired)) {
+                        console.warn('Job Match: recovered from malformed JSON via repair');
+                        return NextResponse.json({ result: repaired });
+                    }
+                } catch {
+                    // repair didn't produce valid JSON either — fall through to retry
+                }
                 lastParseError = parseError;
                 console.error('Job Match Parse Error:', parseError, cleanText);
             }
