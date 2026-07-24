@@ -9,7 +9,10 @@ const MAX_MESSAGE_LENGTH = 2000;
 export async function POST(req: Request) {
     try {
         const ip = getClientIp(req);
-        if (!rateLimit(`chat:${ip}`, 20, 5 * 60 * 1000)) {
+        // A single conversation is already capped at MAX_MESSAGES turns below, so the rate
+        // limit just needs to comfortably exceed that over a realistic conversation length —
+        // not undercut a normal back-and-forth mid-chat.
+        if (!rateLimit(`chat:${ip}`, 50, 15 * 60 * 1000)) {
             return NextResponse.json({ text: "Whoa, slow down! 🚦 Too many messages — please wait a bit before trying again." }, { status: 429 });
         }
 
@@ -51,8 +54,12 @@ YOUR GOAL:
 
 2. Once you have enough info, summarize it and ask: "Shall I draft an email to Divya with these details?"
 3. If they say YES to drafting/sending, YOU MUST FOLLOW THIS EXACT FORMAT:
-   
-   First, write a polite conversational response.
+
+   First, write a short conversational response telling them the summary is ready below and that
+   they need to click the "Send Details to Divya" button to actually send it. Nothing is sent
+   automatically — make it clear this is the next required step, not something already done.
+   Do NOT say things like "I've sent/drafted an email" or "he'll get back to you soon" — nothing
+   has been sent yet at this point.
    Then, output the summary inside these specific tags:
    [EMAIL_SUMMARY_START]
    Client: [Client/Company Name] ([Name])
